@@ -1,12 +1,16 @@
+/*
 pub mod bintree;
 use bintree::BinaryTree;
 use bintree::BinaryTree::*;
 use bintree::TreeNode;
 
 mod twothree;
+*/
+
+mod tree23;
 
 fn main() {
-    let jupiter_tree = NonEmpty(Box::new(TreeNode {
+    /*let jupiter_tree = NonEmpty(Box::new(TreeNode {
         element: "Jupiter",
         left: Empty,
         right: Empty,
@@ -24,7 +28,7 @@ fn main() {
 
     println!("{:?}", tree.clone().inorder());
 
-    let (tree,b) = tree.delete("Neptune");
+    let (tree,b) = tree.delete2("Neptune");
     println!("{:?} : {}", tree.clone().inorder(), b);
 
     let (tree,b) = tree.delete("Eris");
@@ -37,5 +41,5 @@ fn main() {
 
     let (tree,b) = tree.delete("Ganymede");
     println!("{:?} : {}", tree.clone().inorder(), b);
-
+*/
 }
