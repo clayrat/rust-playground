@@ -61,6 +61,8 @@ impl<T: Ord> BinaryTree<T> {
         ret
     }
 
+    // deletion by replacement
+
     fn split_min(self) -> (T, BinaryTree<T>) {
         match self {
             Empty => panic!(),
@@ -95,17 +97,19 @@ impl<T: Ord> BinaryTree<T> {
                         }
                     }
                     Less => {
-                        let (t, b) = left.delete(value);
-                        (Self::create(t, element, right), b)
+                        let (left0, b) = left.delete(value);
+                        (Self::create(left0, element, right), b)
                     }
                     Greater => {
-                        let (t, b) = right.delete(value);
-                        (Self::create(left, element, t), b)
+                        let (right0, b) = right.delete(value);
+                        (Self::create(left, element, right0), b)
                     }
                 }
             }
         }
     }
+
+    // deletion by joining
 
     fn join(t1: Self, t2: Self) -> Self {
         match t1 {
@@ -130,7 +134,7 @@ impl<T: Ord> BinaryTree<T> {
                             Self::create(node3.right, b, r2),
                         )
                     } else {
-                        Self::create(l1, a, (Self::create(Empty, b, r2)))
+                        Self::create(l1, a, Self::create(Empty, b, r2))
                     }
                 }
             },
