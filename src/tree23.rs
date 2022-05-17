@@ -27,7 +27,7 @@ pub struct TreeNode3<T> {
 
 use Tree23::*;
 
-impl<A: Copy> Tree23<A> {
+impl<A> Tree23<A> {
     pub fn create2(left: Self, val: A, right: Self) -> Self {
         NonEmpty2(Box::new(TreeNode2 {
             left: left,
@@ -57,7 +57,7 @@ pub enum UpI<T> {
 
 use UpI::*;
 
-impl<T: Ord + Copy> UpI<T> {
+impl<T: Ord> UpI<T> {
     pub fn collapseI(self) -> Tree23<T> {
         match self {
             SameI(t) => t,
