@@ -165,4 +165,42 @@ impl<T: Ord> BinaryTree<T> {
         }
     }
 
+    fn iter(&self) -> TreeIter<T> {
+        TreeIter {
+            pos: match self {
+                Empty => None,
+                NonEmpty(node) => Some(BinaryTreePos::Left(&node.left, &node.element, &node.right)),
+            },
+            parent: None,
+        }
+    }
+}
+
+pub enum BinaryTreePos<'a, T> {
+    Left(&'a BinaryTree<T>, &'a T, &'a BinaryTree<T>),
+    El(&'a T, &'a BinaryTree<T>),
+    Right(&'a BinaryTree<T>),
+}
+
+struct TreeIter<'a, It> {
+    pos: Option<BinaryTreePos<'a, It>>,
+    parent: Option<Box<TreeIter<'a, It>>>,
+}
+
+impl<'a, It> Iterator for TreeIter<'a, It> {
+    type Item = &'a It;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        match &self.pos {
+            None => match self.parent.take() {
+                Some(parent) => {
+                    // continue with the parent node
+                    *self = *parent;
+                    self.next()
+                }
+                None => None,
+            },
+            Some(p) => todo!(),
+        }
+    }
 }
